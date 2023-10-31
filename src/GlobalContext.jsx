@@ -36,15 +36,27 @@ export function GlobalProviderComponent({ children }) {
 	const [operation, setOperation] = useState('')
 
 	function getKey(e) {
-		if (e.target.dataset.id === '/' || e.target.dataset.id === '*' || e.target.dataset.id === '-' || e.target.dataset.id === '+' || e.target.dataset.id === '.') {
-			if (operation.charAt(operation.length - 1) === '/'
-				|| operation.charAt(operation.length - 1) === '*'
-				|| operation.charAt(operation.length - 1) === '-'
-				|| operation.charAt(operation.length - 1) === '+'
-				|| operation.charAt(operation.length - 1) === '.') {
-				setOperation(prev => prev.slice(0, -1))
-			}
+		checkIfZero()
+		checkIfLastChartIsSymbol(e)
+		updateCalculator(e)
+	}
+	function checkIfZero() {
+		if (operation.charAt(operation.length - 1) === '0') {
+			setOperation(prev => prev.slice(0, -1))
 		}
+	}
+	function checkIfLastChartIsSymbol(e) {
+		const target = e.target.dataset.id
+		const lastChart = operation.charAt(operation.length - 1)
+
+		const isTargetOperator = target === '/' || target === '*' || target === '-' || target === '+' || target === '.'
+		const isLastChartOperator = lastChart === '/' || lastChart === '*' || lastChart === '-' || lastChart === '+' || lastChart === '.'
+
+		if (isTargetOperator && isLastChartOperator) {
+			setOperation(prev => prev.slice(0, -1))
+		}
+	}
+	function updateCalculator(e) {
 		if (e.target.dataset.id === 'AC') {
 			setOperation('')
 		} else if (e.target.dataset.id === '=') {
