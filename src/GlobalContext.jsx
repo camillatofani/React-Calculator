@@ -34,25 +34,26 @@ export function GlobalProviderComponent({ children }) {
 	]
 	// Operation
 	const [operation, setOperation] = useState('')
-	const [last, setLast] = useState(false)
 
 	function getKey(e) {
-		if (last) {
-			setOperation('')
+		if (e.target.dataset.id === '/' || e.target.dataset.id === '*' || e.target.dataset.id === '-' || e.target.dataset.id === '+') {
+			if (operation.charAt(operation.length - 1) === '/'
+				|| operation.charAt(operation.length - 1) === '*'
+				|| operation.charAt(operation.length - 1) === '-'
+				|| operation.charAt(operation.length - 1) === '+') {
+				setOperation(prev => prev.slice(0, -1))
+			}
 		}
 		if (e.target.dataset.id === 'AC') {
-			setLast(false)
 			setOperation('')
 		} else if (e.target.dataset.id === '=') {
 			calculate()
-			setLast(true)
 		} else {
 			setOperation(prev => prev + e.target.dataset.id)
-			setLast(false)
 		}
 	}
 	function calculate() {
-		const result = eval(operation)
+		const result = eval(operation).toString()
 		setOperation(result)
 	}
 
