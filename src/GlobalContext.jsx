@@ -66,7 +66,7 @@ export function GlobalProviderComponent({ children }) {
 		}
 	}
 	function calculate() {
-		const result = eval(operation).toString()
+		const result = eval(operation).toFixed(2).toString()
 		setOperation(result)
 	}
 
