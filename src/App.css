@@ -9,7 +9,9 @@
 	max-width: 900px;
 	margin: 0px auto;
 	text-align: center;
+	box-sizing: border-box;
+	padding: 20px;
 }
 h1 {
-	padding: 20px;
+	padding-bottom: 20px;
 }
