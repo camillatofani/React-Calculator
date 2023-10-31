@@ -36,11 +36,12 @@ export function GlobalProviderComponent({ children }) {
 	const [operation, setOperation] = useState('')
 
 	function getKey(e) {
-		if (e.target.dataset.id === '/' || e.target.dataset.id === '*' || e.target.dataset.id === '-' || e.target.dataset.id === '+') {
+		if (e.target.dataset.id === '/' || e.target.dataset.id === '*' || e.target.dataset.id === '-' || e.target.dataset.id === '+' || e.target.dataset.id === '.') {
 			if (operation.charAt(operation.length - 1) === '/'
 				|| operation.charAt(operation.length - 1) === '*'
 				|| operation.charAt(operation.length - 1) === '-'
-				|| operation.charAt(operation.length - 1) === '+') {
+				|| operation.charAt(operation.length - 1) === '+'
+				|| operation.charAt(operation.length - 1) === '.') {
 				setOperation(prev => prev.slice(0, -1))
 			}
 		}
